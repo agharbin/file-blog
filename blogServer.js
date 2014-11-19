@@ -1,17 +1,15 @@
 var http = require('http');
 var url = require('url');
 var fs = require('fs');
+var template = require('./template.js');
 
 function run() {
 	function requestHandler(request, response){
-		fs.readFile('./templates/template.html', function(err,data){
-			if (err) throw err;
-			response.writeHead(200, {"Content-Type": "text/html"});
-			response.write(data);
-			response.end();
-		});
+		response.writeHead(200, {"Content-Type": "text/html"});
+		response.write(template.getIndex());
+		response.end();
 	}
-	http.createServer(requestHandler).listen(80);
+	http.createServer(requestHandler).listen(8080);
 }
 
 exports.run = run;
