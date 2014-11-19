@@ -1,3 +1,3 @@
-var blogServer = require("./blogServer");
+var blogServer = require("./blogserver.js");
 
 blogServer.run();
