@@ -1,1 +1,4 @@
-Another Post
+{
+    "author" : "Adam Harbin",
+    "content" : "Another Post."    
+}

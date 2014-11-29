@@ -1,1 +1,5 @@
-An Example Post
+{
+    "author"  : "Adam Harbin",
+    "content" : "An example post.",
+    "something" : "Something."
+}
