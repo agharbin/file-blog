@@ -1,12 +1,12 @@
 var fs = require('fs');
 var _ = require('underscore');
 
-CONTENT_TYPES = {
+TEMPLATES = {
     'POSTS': './templates/posts.template'
 };
 
 function render(contentType, contentObj){
-    var templateFileName = "./templates/" + contentType.toLowerCase() + ".template";
+    var templateFileName = TEMPLATES[contentType];
     var templateHTML = String(fs.readFileSync(templateFileName));
     var resultHTML = templateHTML.replace(/{%\s*(\w*)\s*%}/, function(str,s1){
         return JSON.parse(contentObj)[s1];
