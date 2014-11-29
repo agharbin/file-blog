@@ -2,7 +2,8 @@ var fs = require('fs');
 var _ = require('underscore');
 
 TEMPLATES = {
-    'POSTS': './templates/posts.template'
+    'POSTS' : './templates/posts.template',
+    'INDEX' : './templates/index.template'
 };
 
 function render(contentType, contentObj){
@@ -29,7 +30,7 @@ function getPosts(continuation) {
 
 function getIndex() {
     var contentRE = /{%\s*BODY\s*%}/;
-    var templateHTML = String(fs.readFileSync('./templates/index.template'));
+    var templateHTML = String(fs.readFileSync(TEMPLATES['INDEX']));
     return templateHTML.replace(contentRE, getPosts);
 }
 
