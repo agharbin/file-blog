@@ -1,0 +1,29 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+header {
+    width: 100%;
+    background-color: #CCC;
+    padding: 2em;
+}
+
+footer {
+    width: 100%;
+    background-color: #CCC;
+    padding: 2em;
+}
+
+article {
+    margin: 2em;
+}
+
+.header-content {
+    font-weight: bold;
+}
+
+.footer-content {
+    font-weight: bold;
+}

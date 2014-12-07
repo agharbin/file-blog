@@ -6,18 +6,24 @@ TEMPLATES = {
     'INDEX' : './templates/index.template'
 };
 
+function match(token){
+    if (token == 'ANY') return /{%\s*(\w*)\s*%}/g;
+    else return RegExp('{%\\s*' + token + '\\s*%}','g');
+}
+
+function getTemplate(contentType) {
+    return String(fs.readFileSync(TEMPLATES[contentType]));
+}
+
 function render(contentType, contentObj){
-    var templateFileName = TEMPLATES[contentType];
-    var templateHTML = String(fs.readFileSync(templateFileName));
-    var resultHTML = templateHTML.replace(/{%\s*(\w*)\s*%}/, function(str,s1){
+    return getTemplate(contentType).replace(match('ANY'), function(str,s1){
         return JSON.parse(contentObj)[s1];
     });
-    return resultHTML;
 }
 
 function startsWithPeriod(name) { return name[0] == '.' ? false : true; };
 
-function getPosts(continuation) {
+function renderPosts() {
     var files = _.filter(fs.readdirSync('./posts'), startsWithPeriod);
 
     var postHTML = '';
@@ -28,10 +34,9 @@ function getPosts(continuation) {
     return postHTML;
 }
 
-function getIndex() {
-    var contentRE = /{%\s*BODY\s*%}/;
+function renderIndex() {
     var templateHTML = String(fs.readFileSync(TEMPLATES['INDEX']));
-    return templateHTML.replace(contentRE, getPosts);
+    return templateHTML.replace(match('POSTS'), renderPosts);
 }
 
-exports.getIndex = getIndex;
+exports.renderIndex = renderIndex;
